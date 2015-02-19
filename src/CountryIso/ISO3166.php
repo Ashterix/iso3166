@@ -10,6 +10,8 @@ namespace CountryIso;
 class ISO3166
 {
 
+    private $countriesAliases = [];
+
     private $countries = [
         'AF' => 'Afghanistan',
         'AX' => 'Aland Islands',
@@ -261,6 +263,33 @@ class ISO3166
     private $countriesFlip = [];
 
     /**
+     * Set aliases for country
+     *
+     * @param array $countriesAliases
+     *
+     * @throws \Exception
+     */
+    public function setCountriesAliases($countriesAliases)
+    {
+        foreach ($countriesAliases as $code => $names) {
+            if (mb_strlen($code) != 2){
+                throw new \Exception("\"$code\" - the code does not conform to ISO3166");
+            }
+
+            if (is_array($names)) {
+                foreach ($names as $name) {
+                    $this->countriesAliases[$name] = mb_strtoupper($code);
+                }
+            } elseif (is_string($names)) {
+                $this->countriesAliases[$names] = mb_strtoupper($code);
+            } else {
+                throw new \Exception("invalid alias for code \"$code\"");
+            }
+        }
+
+    }
+
+    /**
      * Get country by iso code
      * @param $code
      *
@@ -269,11 +298,11 @@ class ISO3166
      */
     public function getCountry($code)
     {
-        if (!isset($this->countries[$code])){
+        if (!isset($this->countries[mb_strtoupper($code)])) {
             throw new \Exception("\"$code\" - code is not found in the list of countries");
         }
 
-        return $this->countries[$code];
+        return $this->countries[mb_strtoupper($code)];
     }
 
     /**
@@ -286,14 +315,30 @@ class ISO3166
      */
     public function getCode($name)
     {
-        if (!$this->countriesFlip){
+        if (empty($this->countriesFlip)){
             $this->countriesFlip = array_flip($this->countries);
         }
-        if (!isset($this->countriesFlip[$name])){
+        $codeFromAliases = $this->getCodeByAliases($name);
+        if (!isset($this->countriesFlip[$name]) && $codeFromAliases === false){
             throw new \Exception("\"$name\" - country is not found in the list of countries");
         }
+        return ($codeFromAliases) ? $codeFromAliases : $this->countriesFlip[$name];
+    }
 
-        return $this->countriesFlip[$name];
+    /**
+     * Get iso code by country alias
+     *
+     * @param $name
+     *
+     * @return bool | string
+     */
+    private function getCodeByAliases($name)
+    {
+        $return = false;
+        if (!empty($this->countriesAliases)){
+            $return = $this->countriesAliases[$name];
+        }
+        return $return;
     }
 
     /**
