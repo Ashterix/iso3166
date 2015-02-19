@@ -2,7 +2,7 @@
   "name": "ashterix/country-iso",
   "type": "library",
   "description": "Get localized country names from ISO 3166-1 codes",
-  "keywords": ["ISO 3166, country, codes", "localized"],
+  "keywords": ["ISO 3166, country, codes, localized"],
   "license": "MIT",
   "authors": [
     {
