@@ -1,5 +1,5 @@
 {
-  "name": "ashterix/iso3166",
+  "name": "ashterix/country-iso",
   "type": "library",
   "description": "Get localized country names from ISO 3166-1 codes",
   "keywords": ["ISO 3166-1, country, codes", "localized"],
@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-0": {
-      "iso3166": "src/"
+      "CountryIso": "src/"
     }
   }
 }

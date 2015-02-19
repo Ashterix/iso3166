@@ -5,9 +5,9 @@
  * Time: 14:18
  */
 
-namespace Iso3166;
+namespace CountryIso;
 
-class Iso3166
+class CountryIso
 {
 
     private $countries = [
