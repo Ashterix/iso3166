@@ -1,13 +1,13 @@
 <?php
 /**
- * Created by Administrator.
+ * Created by Ashterix <ashterix69@gmail.com>
  * Date: 19.02.2015
  * Time: 14:18
  */
 
 namespace CountryIso;
 
-class CountryIso
+class ISO3166
 {
 
     private $countries = [
