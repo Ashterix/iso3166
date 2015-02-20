@@ -293,10 +293,10 @@ class ISO3166
 
             if (is_array($names)) {
                 foreach ($names as $name) {
-                    $this->countriesAliases[$name] = mb_strtoupper($code);
+                    $this->countriesAliases[mb_strtoupper($name)] = mb_strtoupper($code);
                 }
             } elseif (is_string($names)) {
-                $this->countriesAliases[$names] = mb_strtoupper($code);
+                $this->countriesAliases[mb_strtoupper($names)] = mb_strtoupper($code);
             } else {
                 throw new \Exception("invalid alias for code \"$code\"");
             }
@@ -331,13 +331,13 @@ class ISO3166
     public function getCode($name)
     {
         if (empty($this->countriesFlip)){
-            $this->countriesFlip = array_flip($this->countries);
+            $this->countriesFlip = array_change_key_case(array_flip($this->countries),CASE_UPPER);
         }
         $codeFromAliases = $this->getCodeByAliases($name);
-        if (!isset($this->countriesFlip[$name]) && $codeFromAliases === false){
+        if (!isset($this->countriesFlip[mb_strtoupper($name)]) && $codeFromAliases === false){
             throw new \Exception("\"$name\" - country is not found in the list of countries");
         }
-        return ($codeFromAliases) ? $codeFromAliases : $this->countriesFlip[$name];
+        return ($codeFromAliases) ? $codeFromAliases : $this->countriesFlip[mb_strtoupper($name)];
     }
 
     /**
@@ -351,7 +351,7 @@ class ISO3166
     {
         $return = false;
         if (!empty($this->countriesAliases)){
-            $return = $this->countriesAliases[$name];
+            $return = $this->countriesAliases[mb_strtoupper($name)];
         }
         return $return;
     }
