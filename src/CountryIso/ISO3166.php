@@ -267,6 +267,21 @@ class ISO3166
      *
      * @param array $countriesAliases
      *
+     * @example:
+     *  $countryCodes = new ISO3166();
+     *  // Add an alias for the Vatican
+     *  $countryCodes->setCountriesAliases([
+     *      'VA' => 'Vatican'
+     *  ]);
+     *  // or add some aliases for the Vatican
+     *  $countryCodes->setCountriesAliases([
+     *      'VA' => [
+     *          'Holy See',
+     *          'Vatican',
+     *          'Vatican City State'
+     *      ]
+     *  ]);
+     *
      * @throws \Exception
      */
     public function setCountriesAliases($countriesAliases)
