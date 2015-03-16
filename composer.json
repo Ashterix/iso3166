@@ -1,22 +1,21 @@
 {
-  "name": "ashterix/country-iso",
-  "type": "library",
-  "description": "Get localized country names from ISO 3166-1 codes",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Alex Maistrenko",
-      "email": "ashterix69@gmail.com",
-      "role": "Developer"
+    "name": "ashterix/country-iso",
+    "type": "library",
+    "description": "Get localized country names from ISO 3166-1 codes",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alex Maystrenko",
+            "email": "ashterix69@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-0": {
+            "CountryIso": "src/"
+        }
     }
-  ],
-  "minimum-stability": "dev",
-  "require": {
-    "php": ">=5.4"
-  },
-  "autoload": {
-    "psr-0": {
-      "CountryIso": "src/"
-    }
-  }
 }
